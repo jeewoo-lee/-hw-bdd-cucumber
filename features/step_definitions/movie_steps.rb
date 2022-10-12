@@ -42,12 +42,19 @@ end
 # Part 2, Step 3
 Then /^I should (not )?see the following movies: (.*)$/ do |no, movie_list|
   # Take a look at web_steps.rb Then /^(?:|I )should see "([^"]*)"$/
-  pending "Fill in this step in movie_steps.rb"
+  movies = movie_list.split(", ")
+  movies.each do |movie|
+    if no
+      expect(page).not_to have_content("#{movie}")
+    else
+      expect(page).to have_content("#{movie}")
+    end
+  end
 end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  pending "Fill in this step in movie_steps.rb"
+  expect(Movie.count).to eq 10
 end
 
 ### Utility Steps Just for this assignment.
